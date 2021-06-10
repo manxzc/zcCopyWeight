@@ -1,0 +1,5 @@
+rootProject.name = "Copyweight"
+include ':app'
+include ':module_weight_comm'
+include ':module_weight_login'
+include ':module_weight_home'
