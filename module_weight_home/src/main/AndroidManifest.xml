@@ -16,6 +16,12 @@
             android:launchMode="singleTask"></activity>
         <activity android:name=".ui.GoodsListActivity"
             android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.PropertiesActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.LotActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.ClientActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>

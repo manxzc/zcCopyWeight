@@ -1,6 +1,5 @@
 package cn.ymade.module_home.ui
 
-import android.content.Intent
 import android.view.View
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivitySettingBinding
@@ -10,7 +9,6 @@ import com.shehuan.nicedialog.NiceDialog
 import com.shehuan.nicedialog.ViewConvertListener
 import com.shehuan.nicedialog.ViewHolder
 import com.zcxie.zc.model_comm.base.BaseActivity
-import com.zcxie.zc.model_comm.base.BaseApplication
 import com.zcxie.zc.model_comm.util.CommUtil
 
 /**
@@ -43,7 +41,7 @@ class SettingsActivity :BaseActivity<VMSetting,ActivitySettingBinding>() {
     }
     private var niceDialog: NiceDialog? = null
     fun createLoginOutDialog() {
-        niceDialog = NiceDialog.init().setLayoutId(R.layout.dialog_text_chose_promapt)
+        niceDialog = NiceDialog.init().setLayoutId(R.layout.dialog_create)
         niceDialog?.setConvertListener(object : ViewConvertListener() {
             override fun convertView(holder: ViewHolder, dialog: BaseNiceDialog) {
                 holder.setText(R.id.dialog_tittle_tv, "设备注销")

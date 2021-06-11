@@ -17,7 +17,7 @@ interface GoodsDao {
     fun getAll(): List<GoodsBean>
 
     @Query("SELECT * FROM goodsbean WHERE :no is null or GoodsNO =(:no) ")
-    fun loadAllByNos(no:String): List<GoodsBean>
+    fun loadAllByNos(no:String?): List<GoodsBean>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg beans: GoodsBean)

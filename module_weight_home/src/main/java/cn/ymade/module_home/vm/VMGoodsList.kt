@@ -51,9 +51,7 @@ class VMGoodsList :BaseViewModel() {
     private fun loadData(){
         datas.clear()
         Observable.create<List<GoodsBean>> {
-
-           it.onNext(DataBaseManager.db.goodsDao().loadAllByNos(lastSearch))
-
+            it.onNext(DataBaseManager.db.goodsDao().loadAllByNos(if (lastSearch.isNullOrEmpty()) null else lastSearch))
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<List<GoodsBean>> {

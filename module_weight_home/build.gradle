@@ -24,6 +24,7 @@ android {
                 arg("AROUTER_GENERATE_DOC", "enable")
             }
         }
+
     }
 
     buildTypes {

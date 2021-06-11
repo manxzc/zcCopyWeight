@@ -1,0 +1,194 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "0cf5403955c20febdd7bcd1eaa7575a7",
+    "entities": [
+      {
+        "tableName": "DevInfoBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` TEXT NOT NULL, `UUID` TEXT, `Company` TEXT, `CompanySN` TEXT, `Device` TEXT, `DeviceSN` TEXT, `ExpiryDate` TEXT, `RegDate` TEXT, `SN` TEXT, `Renew` INTEGER, `Url` TEXT, `Version` TEXT, PRIMARY KEY(`uid`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "UUID",
+            "columnName": "UUID",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Company",
+            "columnName": "Company",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "CompanySN",
+            "columnName": "CompanySN",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Device",
+            "columnName": "Device",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "DeviceSN",
+            "columnName": "DeviceSN",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ExpiryDate",
+            "columnName": "ExpiryDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "RegDate",
+            "columnName": "RegDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "SN",
+            "columnName": "SN",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Renew",
+            "columnName": "Renew",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Url",
+            "columnName": "Url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Version",
+            "columnName": "Version",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "GoodsBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `GoodsNO` TEXT, `GoodsName` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "GoodsNO",
+            "columnName": "GoodsNO",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "GoodsName",
+            "columnName": "GoodsName",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "LotDataBean",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`lotId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `status` TEXT, `lotName` TEXT, `lotNo` TEXT, `items` INTEGER NOT NULL, `user` TEXT, `weight` REAL, `createTime` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "lotId",
+            "columnName": "lotId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lotName",
+            "columnName": "lotName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lotNo",
+            "columnName": "lotNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "items",
+            "columnName": "items",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user",
+            "columnName": "user",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weight",
+            "columnName": "weight",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createTime",
+            "columnName": "createTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "lotId"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0cf5403955c20febdd7bcd1eaa7575a7')"
+    ]
+  }
+}

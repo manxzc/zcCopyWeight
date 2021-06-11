@@ -19,7 +19,7 @@ public class AppConfig {
 //
 //    public static MMKVEntity<Long> lotAutoSN = mmkvHelper.create("lotAutoSN",1);
 
-    private static SPHelper sPrefs = new SPHelper("packDatas", Context.MODE_PRIVATE);
+    private static SPHelper sPrefs = new SPHelper("copyWeightDatas", Context.MODE_PRIVATE);
     public static SharedPreference<Boolean> Login = sPrefs.value("login", false);
     public static SharedPreference<String> oaid = sPrefs.value("oaid", UUID.randomUUID().toString());
 
@@ -31,6 +31,15 @@ public class AppConfig {
     public static SharedPreference<String> staff = sPrefs.value("staffName", "--");
 
     public static SharedPreference<Long> lotAutoSN = sPrefs.value("lotAutoSN",1l);
+
+    public static SharedPreference<Boolean> swItem = sPrefs.value("swItem",true);
+    public static SharedPreference<Boolean> swLot = sPrefs.value("swLot",true);
+    public static SharedPreference<Boolean> sw3102 = sPrefs.value("sw3102",true);
+    public static SharedPreference<Boolean> sw3100 = sPrefs.value("sw3100",false);
+    public static SharedPreference<Boolean> swCreate= sPrefs.value("swCreate",false);
+    public static SharedPreference<Boolean> swPackage = sPrefs.value("swPackage ",false);
+    public static SharedPreference<Boolean> swEnd = sPrefs.value("swEnd",false);
+
 
     public static void clearAll() {
 //        mmkvHelper.clearAll();
