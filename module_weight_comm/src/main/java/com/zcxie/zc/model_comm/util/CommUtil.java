@@ -45,6 +45,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -385,6 +386,17 @@ public class CommUtil<T> {
     {
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            return df.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static Date ConverToDateDay(String strDate)
+    {
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return df.parse(strDate);
         } catch (ParseException e) {
@@ -1081,5 +1093,27 @@ public class CommUtil<T> {
             newList.add(list.subList(fromIndex,toIndex)) ;
         }
         return  newList ;
+    }
+    /**
+     2      * 获取今天开始时间
+     3      */
+   public static Long getStartTime() {
+       Calendar todayStart = Calendar.getInstance();
+       todayStart.set(Calendar.HOUR, 0);
+       todayStart.set(Calendar.MINUTE, 0);
+       todayStart.set(Calendar.SECOND, 0);
+       todayStart.set(Calendar.MILLISECOND, 0);
+       return todayStart.getTime().getTime();
+   }
+    /**
+ 14      * 获取今天结束时间
+ 15      */
+    public static Long getEndTime() {
+        Calendar todayEnd = Calendar.getInstance();
+        todayEnd.set(Calendar.HOUR, 23);
+        todayEnd.set(Calendar.MINUTE, 59);
+        todayEnd.set(Calendar.SECOND, 59);
+        todayEnd.set(Calendar.MILLISECOND, 999);
+        return todayEnd.getTime().getTime();
     }
 }

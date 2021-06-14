@@ -1,5 +1,8 @@
 package cn.ymade.module_home.ui
 
+import android.content.Intent
+import android.util.Log
+import androidx.lifecycle.Observer
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivityLotBinding
 import cn.ymade.module_home.vm.VMLot
@@ -20,14 +23,28 @@ class LotActivity : BaseActivity<VMLot,ActivityLotBinding>() {
 
     override fun processLogic() {
         initTopSearchBar()
+        initBtmOnlyMind("新建单据")
         mBinding?.let { binding->
             binding.mViewPager.adapter= mViewModel?.initFragment(this)
             binding.mViewPager.offscreenPageLimit=3
             binding.mTabLayout.setupWithViewPager(binding.mViewPager)
         }
-
+        initEnven()
     }
 
+    private fun initEnven() {
+        LiveDataBus.get().with("createLot",Int::class.java).observe(this,object :Observer<Int>{
+            override fun onChanged(t: Int?) {
+                LiveDataBus.get().with("reloadLot").postValue(1)
+            }
+        })
+    }
+
+    override fun clickOnlyMind() {
+        super.clickOnlyMind()
+        Log.i(TAG, "clickOnlyMind: 创建新的")
+       startActivity(Intent(this,LotCreateActivity::class.java))
+    }
     override fun findViewModelClass(): Class<VMLot> {
         return VMLot::class.java
     }

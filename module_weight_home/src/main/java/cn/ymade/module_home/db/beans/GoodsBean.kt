@@ -3,6 +3,7 @@ package cn.ymade.module_home.db.beans
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 /**
  * @author zc.xie
@@ -12,9 +13,13 @@ import androidx.room.PrimaryKey
  * description：
  */
 @Entity()
-data class GoodsBean(@PrimaryKey(autoGenerate = true)
-                     val id:Int,
-                     @ColumnInfo(name = "GoodsNO") var GoodsNO: String ?,
-                     @ColumnInfo(name = "GoodsName") val GoodsName: String?) {
-
+ class GoodsBean  : Serializable {
+    @PrimaryKey
+    var GoodsName: String=""
+    var lotId:Long=0
+    var weight:Float=0f
+   var createDate:String=""
+   var shelflife:String=""
+    var lotNumber:String=""
+    @ColumnInfo(name = "GoodsNO") var GoodsNO: String  =""  //货号
 }

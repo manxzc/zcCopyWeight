@@ -15,13 +15,13 @@
         android:textSize="@dimen/size_16dp"
         android:paddingLeft="@dimen/size_16dp"
         android:layout_height="@dimen/size_40dp"></TextView>
-    <androidx.recyclerview.widget.RecyclerView
+    <com.yanzhenjie.recyclerview.SwipeRecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/rv_client">
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </com.yanzhenjie.recyclerview.SwipeRecyclerView>
     <include layout="@layout/layout_bottom_only_mid_btn"></include>
 </LinearLayout>
 </layout>

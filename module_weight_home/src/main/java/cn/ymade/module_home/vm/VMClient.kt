@@ -10,6 +10,7 @@ import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.ui.ClientActivity
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
+import com.zcxie.zc.model_comm.util.LiveDataBus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -21,9 +22,16 @@ class VMClient :BaseViewModel() {
     var act:ClientActivity?=null
     var list= mutableListOf<ClientBean>()
     var lastSearch=""
+    var selectClient=false
     val itemClick=object :CallBack<ClientBean>{
         override fun callBack(data: ClientBean?) {
             Log.i(TAG, "callBack: itemClick "+data!!.clientName)
+            if (selectClient){
+                LiveDataBus.get().with("selectedClient",).postValue(data.clientName+" "+data.clientPhone)
+                act!!.finish()
+                return
+            }
+            act!!.createDialog(data.clientName,data.clientPhone)
         }
     }
     val itemDeleteClick=object :CallBack<ClientBean>{
@@ -33,10 +41,21 @@ class VMClient :BaseViewModel() {
     }
     val adapter =ClientAdapter(list,itemClick,itemDeleteClick)
 
-    fun initData(act:ClientActivity,rv:RecyclerView){
+    fun delete(position:Int){
+      var deletbean=  list.removeAt(position)
+        adapter.notifyDataSetChanged()
+        act!!.reloadTitle(list.size)
+        Thread{
+            DataBaseManager.db.clientDao().delete(deletbean)
+        }.start()
+    }
+
+    fun initData(act:ClientActivity,rv:RecyclerView,selectClient:Boolean){
+        this.selectClient=selectClient
         this.act=act;
         rv.layoutManager=LinearLayoutManager(act)
         rv.adapter=adapter
+        loadData()
     }
 
     fun  search(str:String){

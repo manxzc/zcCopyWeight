@@ -1,9 +1,8 @@
 package cn.ymade.module_home.adapter
 
-import android.util.Log
 import android.view.View
 import cn.ymade.module_home.R
-import cn.ymade.module_home.databinding.ItemGoodsBinding
+import cn.ymade.module_home.databinding.ItemGoodsCategoryBinding
 import cn.ymade.module_home.db.beans.GoodsBean
 import cn.ymade.module_home.db.beans.GoodsCatrgoryBeanN
 import com.zcxie.zc.model_comm.base.BindBaseAdapter
@@ -17,31 +16,32 @@ import com.zcxie.zc.model_comm.callbacks.CallBack
  * email：3104873490@qq.com
  * description：
  */
-class GoodsListAdapter(var list: List<GoodsBean>, val itemCallback:CallBack<GoodsBean>) : BindBaseAdapter<GoodsBean>(list) {
+class GoodsCategoryAdapter(var list: List<GoodsCatrgoryBeanN>, val itemCallback:CallBack<GoodsCatrgoryBeanN>) : BindBaseAdapter<GoodsCatrgoryBeanN>(list) {
     var showDelete=false
-    var itemDeleteCallback:CallBack<Int>?=null
+    var itemDeleteCallback:CallBack<GoodsBean>?=null
     fun showDelete(show:Boolean){
         showDelete=show
     }
     override fun getLayoutId(): Int {
-        return R.layout.item_goods
+        return R.layout.item_goods_category
     }
 
     override fun onBindViewHolder(holder: BindBaseViewHolder, position: Int) {
         var data=list[position]
-        ( holder.binding as ItemGoodsBinding).bean=data
-        ( holder.binding as ItemGoodsBinding).executePendingBindings()
+        ( holder.binding as ItemGoodsCategoryBinding).bean=data
+        ( holder.binding as ItemGoodsCategoryBinding).executePendingBindings()
         holder.itemView.setOnClickListener {
             itemCallback?.callBack(data)
         }
         if (showDelete){
-            ( holder.binding as ItemGoodsBinding).assetSelectDelectIv.visibility=View.VISIBLE
+            ( holder.binding as ItemGoodsCategoryBinding).assetSelectDelectIv.visibility=View.VISIBLE
         }else{
-            ( holder.binding as ItemGoodsBinding).assetSelectDelectIv.visibility=View.GONE
+            ( holder.binding as ItemGoodsCategoryBinding).assetSelectDelectIv.visibility=View.GONE
         }
-        ( holder.binding as ItemGoodsBinding).assetSelectDelectIv.setOnClickListener {
-            Log.i("TAG", "onBindViewHolder: delete "+position+" itemDeleteCallback "+itemDeleteCallback)
-            itemDeleteCallback?.callBack(position)
+        ( holder.binding as ItemGoodsCategoryBinding).assetSelectDelectIv.setOnClickListener {
+            itemDeleteCallback?.let {
+                callBack -> list[position]
+            }
         }
 
     }

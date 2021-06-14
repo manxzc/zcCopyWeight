@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:id="@+id/ll_bottom_two_parent"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:id="@+id/bottom_left_tv"
+                android:layout_width="130dp"
+                android:text="扫码"
+                android:textSize="14dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_radius_left_blue"
+                android:layout_height="30dp"></TextView>
+        <View
+            android:layout_width="2px"
+            android:background="@color/white"
+            android:layout_height="match_parent"></View>
+            <TextView
+                android:id="@+id/bottom_right_tv"
+                android:layout_width="130dp"
+                android:text="资产新增"
+                android:textSize="14dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_radius_right_blue"
+                android:layout_height="30dp"></TextView>
+        </LinearLayout>
+</layout>

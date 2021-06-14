@@ -22,6 +22,14 @@
             android:launchMode="singleTask"></activity>
         <activity android:name=".ui.ClientActivity"
             android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.LotCreateActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.LotInfoActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.SearchGoodsActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.SummaryActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>

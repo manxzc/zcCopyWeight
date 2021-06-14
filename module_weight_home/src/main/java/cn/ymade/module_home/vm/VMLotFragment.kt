@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.ymade.module_home.adapter.LotAdapter
 import cn.ymade.module_home.db.beans.LotDataBean
 import cn.ymade.module_home.db.database.DataBaseManager
+import cn.ymade.module_home.ui.LotInfoActivity
 import cn.ymade.module_home.ui.fragment.LotFragment
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
@@ -34,7 +35,7 @@ class VMLotFragment :BaseViewModel() {
     var snAdapter= LotAdapter(snList,object : CallBack<LotDataBean> {
         override fun callBack(data: LotDataBean?) {
             Log.i(TAG, "VMListFragment callBack: data "+data.toString())
-//            fragment!!.context!!.startActivity(Intent( fragment!!.context!!, LotInfoActivity::class.java).putExtra("selectLot",data))
+            fragment!!.context!!.startActivity(Intent( fragment!!.context!!, LotInfoActivity::class.java).putExtra("lotdata",data))
         }
     })
 
@@ -49,9 +50,9 @@ class VMLotFragment :BaseViewModel() {
         snList.clear()
         Observable.create<List<LotDataBean>> {
                 when (type) {
-                    0 -> it.onNext(DataBaseManager.db.lotDao().loadAllByNos(lastSearch))
-                    1 -> it.onNext(DataBaseManager.db.lotDao().getAllByLotStatus(lastSearch,"处理中"))
-                    2 -> it.onNext(DataBaseManager.db.lotDao().getAllByLotStatus(lastSearch,"完成"))
+                    0 -> it.onNext(DataBaseManager.db.lotDao().loadAllByNos(if (lastSearch.isNullOrEmpty()) null else lastSearch))
+                    1 -> it.onNext(DataBaseManager.db.lotDao().getAllByLotStatus(if (lastSearch.isNullOrEmpty()) null else lastSearch,"处理中"))
+                    2 -> it.onNext(DataBaseManager.db.lotDao().getAllByLotStatus(if (lastSearch.isNullOrEmpty()) null else lastSearch,"完成"))
                 }
 
         }.subscribeOn(Schedulers.io())
@@ -79,7 +80,7 @@ class VMLotFragment :BaseViewModel() {
     }
     fun getTabStr(index: Int, searchCount: Int): String {
         Log.i("TAG", "getTabStr:  searchCount $searchCount")
-        return if (index == 0) "全部($searchCount)" else if (index == 1) "未上传($searchCount)" else if (index == 2) "已上传($searchCount)"  else "全部($searchCount)"
+        return if (index == 0) "全部($searchCount)" else if (index == 1) "处理中($searchCount)" else if (index == 2) "完成($searchCount)"  else "全部($searchCount)"
     }
 
     fun searchData(string: String){

@@ -43,6 +43,9 @@ class LotFragment(val type: Int, val title: String) :BaseFragment<VMLotFragment,
             .observe(this, { t -> mViewModel?.searchData(t) })
         LiveDataBus.get().with("notyChange", String::class.java)
             .observe(this, { mViewModel?.reSearchData() })
+        LiveDataBus.get().with("reloadLot", Int::class.java)
+            .observe(this, { t -> mViewModel?.reSearchData() })
+
     }
 
     fun  reloadTitle(title: String){

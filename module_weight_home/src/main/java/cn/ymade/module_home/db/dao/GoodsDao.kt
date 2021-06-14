@@ -19,6 +19,15 @@ interface GoodsDao {
     @Query("SELECT * FROM goodsbean WHERE :no is null or GoodsNO =(:no) ")
     fun loadAllByNos(no:String?): List<GoodsBean>
 
+    @Query("SELECT * FROM goodsbean WHERE  GoodsName =(:code) limit 1 ")
+    fun loadAllByCode(code:String?): List<GoodsBean>
+
+    @Query("SELECT * FROM goodsbean WHERE GoodsName =(:name) ")
+    fun loadAllByName(name:String?): List<GoodsBean>
+
+    @Query("SELECT * FROM goodsbean WHERE :lotId is null or lotId =(:lotId) ")
+    fun loadAllByLotId(lotId:Long?): List<GoodsBean>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg beans: GoodsBean)
 

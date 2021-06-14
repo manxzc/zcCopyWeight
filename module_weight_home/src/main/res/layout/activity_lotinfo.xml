@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:background="@color/background">
+        <include layout="@layout/top_bar_layout"></include>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/ll_lot_info">
+            <FrameLayout
+                android:id="@+id/fl_client"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="@dimen/size_45dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="客户"
+                    style="@style/commTextKey">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_client"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:hint="客户"
+                    android:gravity="right|center_vertical"
+                    style="@style/commTextValue">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+            <FrameLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="摘要"
+                    style="@style/commTextKey">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/et_exp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:background="@null"
+                    android:gravity="center_vertical|right"
+                    android:hint="摘要"
+                    android:maxLines="1"
+                    android:enabled="false"
+                    android:maxLength="35"
+                    android:singleLine="true"
+                    style="@style/commTextValue"></EditText>
+                <!--            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_./"-->
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+            <FrameLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="经办人"
+                    style="@style/commTextKey">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/et_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:background="@null"
+                    android:gravity="center_vertical|right"
+                    android:hint="经办人"
+                    android:maxLines="1"
+                    android:maxLength="35"
+                    android:enabled="false"
+                    android:singleLine="true"
+                    style="@style/commTextValue"></EditText>
+
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+            <FrameLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="日期"
+                    style="@style/commTextKey">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:gravity="right|center_vertical"
+                    style="@style/commTextValue">
+
+                </TextView>
+
+            </FrameLayout>
+        </LinearLayout>
+
+<!--        称重的layout-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:paddingTop="@dimen/size_6dp"
+            android:paddingLeft="@dimen/size_16dp"
+            android:paddingRight="@dimen/size_10dp"
+            android:id="@+id/ll_weight">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:paddingBottom="6dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_goods_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="扫描条码 \n自动解析"
+                    android:maxLines="2"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/size_14dp"></TextView>
+
+                <ImageView
+                    android:id="@+id/img_delete"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/delet_red_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dimen10"></ImageView>
+            </LinearLayout>
+            <View style="@style/bottomLine"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/size_6dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="货号"
+                    android:textSize="@dimen/size_16dp"
+
+                    android:textColor="@color/color_666666"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></TextView>
+                <TextView
+                    android:id="@+id/goods_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/size_16dp"
+                    tools:text="sadd"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:paddingTop="4dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="重量"
+                    android:textColor="@color/color_666666"
+                    android:textSize="@dimen/size_16dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen10"
+                    android:paddingRight="@dimen/dimen10"
+                    android:paddingBottom="@dimen/size_6dp"
+                    android:paddingTop="@dimen/size_6dp"
+                    android:id="@+id/tv_left"
+                    android:text="-"></TextView>
+                <EditText
+                    android:id="@+id/et_weight"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:textColor="@color/color_333333"
+                    android:gravity="center_horizontal"
+                    android:textSize="@dimen/size_16dp"
+                    android:text="0.0"
+                    android:minWidth="@dimen/dimen20"
+                    android:digits="0123456789."
+                    android:maxWidth="@dimen/size_100dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </EditText>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen10"
+                    android:id="@+id/tv_right"
+                    android:paddingRight="@dimen/dimen10"
+                    android:paddingBottom="@dimen/size_6dp"
+                    android:paddingTop="@dimen/size_6dp"
+                    android:text="+"></TextView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <View
+                style="@style/leftLine"></View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_12dp"
+                android:text="货品"
+                android:id="@+id/rvtitle_count"
+                android:textSize="@dimen/size_16dp">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_12dp"
+                android:text="货品"
+                android:id="@+id/rvtitle_weight"
+                android:textSize="@dimen/size_16dp">
+            </TextView>
+        </LinearLayout>
+
+        <com.yanzhenjie.recyclerview.SwipeRecyclerView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/size_6dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/rv_goods">
+
+        </com.yanzhenjie.recyclerview.SwipeRecyclerView>
+        <include layout="@layout/layout_bottom_only_mid_btn" android:visibility="gone"></include>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:id="@+id/ll_bottom_two_parent"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:id="@+id/bottom_left_tv"
+                android:layout_width="130dp"
+                android:text="扫码"
+                android:textSize="14dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_radius_left_blue"
+                android:layout_height="30dp"></TextView>
+            <View
+                android:layout_width="2px"
+                android:background="@color/white"
+                android:layout_height="match_parent"></View>
+            <TextView
+                android:id="@+id/bottom_right_tv"
+                android:layout_width="130dp"
+                android:text="资产新增"
+                android:textSize="14dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/shape_radius_right_blue"
+                android:layout_height="30dp"></TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

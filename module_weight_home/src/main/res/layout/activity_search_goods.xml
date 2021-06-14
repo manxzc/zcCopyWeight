@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+        <include layout="@layout/top_bar_layout" android:visibility="gone"></include>
+        <include layout="@layout/layout_search_bar"></include>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:id="@+id/ll_goods_info">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="@dimen/size_40dp">
+                <View
+                    style="@style/leftLine"></View>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_12dp"
+                    android:text="货品信息"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/size_16dp">
+                </TextView>
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="@dimen/size_45dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="货号"
+                    style="@style/commTextKey">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:hint="货号"
+                    android:gravity="right|center_vertical"
+                    style="@style/commTextValue">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+            <FrameLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="重量(kg)"
+                    style="@style/commTextKey">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/et_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:background="@null"
+                    android:gravity="center_vertical|right"
+                    android:hint="摘要"
+                    android:maxLines="1"
+                    android:enabled="false"
+                    android:maxLength="35"
+                    android:singleLine="true"
+                    style="@style/commTextValue"></EditText>
+                <!--            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_./"-->
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+            <FrameLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="日期"
+                    android:id="@+id/tv_date"
+                    style="@style/commTextKey">
+                </TextView>
+
+                <EditText
+                    android:id="@+id/et_date"
+                    style="@style/commTextValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:background="@null"
+                    android:enabled="false"
+                    android:gravity="center_vertical|right"
+                    android:hint="161213"
+                    android:maxLength="35"
+                    android:maxLines="1"
+                    android:singleLine="true"></EditText>
+
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+            <FrameLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_45dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="批号"
+                    style="@style/commTextKey">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_lot_number"
+                    style="@style/commTextValue"
+                    android:layout_width="261dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:gravity="right|center_vertical">
+
+                </TextView>
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:id="@+id/ll_lot">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="@dimen/size_40dp">
+            <View
+                style="@style/leftLine"></View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_12dp"
+                android:text="单据信息"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/size_16dp">
+            </TextView>
+        </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="@dimen/size_45dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="客户"
+                    style="@style/commTextKey">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_client"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:hint="货号"
+                    android:gravity="right|center_vertical"
+                    style="@style/commTextValue">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="@dimen/size_45dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="摘要"
+                    style="@style/commTextKey">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_exp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:hint="货号"
+                    android:gravity="right|center_vertical"
+                    style="@style/commTextValue">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="@dimen/size_45dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="经办"
+                    style="@style/commTextKey">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="@dimen/size_100dp"
+                    android:layout_marginRight="@dimen/size_45dp"
+                    android:hint="货号"
+                    android:gravity="right|center_vertical"
+                    style="@style/commTextValue">
+
+                </TextView>
+
+            </FrameLayout>
+
+            <View
+                android:layout_marginLeft="@dimen/size_16dp"
+                style="@style/bottomLine"></View>
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

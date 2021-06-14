@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background">
+        <include layout="@layout/top_bar_layout"></include>
+        <FrameLayout
+            android:id="@+id/fl_client"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="@dimen/size_45dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_6dp"
+                android:textColor="@color/red">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="客户"
+                style="@style/commTextKey">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_client"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="@dimen/size_100dp"
+                android:layout_marginRight="@dimen/size_45dp"
+                android:hint="请选择客户"
+                android:gravity="right|center_vertical"
+                style="@style/commTextValue">
+
+            </TextView>
+
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:padding="@dimen/size_2dp"
+                android:src="@mipmap/arrow_right_gray">
+
+            </ImageView>
+
+
+        </FrameLayout>
+
+        <View
+            android:layout_marginLeft="@dimen/size_16dp"
+            style="@style/bottomLine"></View>
+        <FrameLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="摘要"
+                style="@style/commTextKey">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/et_exp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_100dp"
+                android:layout_marginRight="@dimen/size_45dp"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请输入摘要"
+                android:maxLines="1"
+                android:maxLength="35"
+                android:singleLine="true"
+                style="@style/commTextValue"></EditText>
+<!--            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_./"-->
+        </FrameLayout>
+
+        <View
+            android:layout_marginLeft="@dimen/size_16dp"
+            style="@style/bottomLine"></View>
+        <FrameLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="经办人"
+                style="@style/commTextKey">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/et_user"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_100dp"
+                android:layout_marginRight="@dimen/size_45dp"
+                android:background="@null"
+                android:gravity="center_vertical|right"
+                android:hint="请输入经办人"
+                android:maxLines="1"
+                android:maxLength="35"
+                android:singleLine="true"
+                style="@style/commTextValue"></EditText>
+
+        </FrameLayout>
+
+        <View
+            android:layout_marginLeft="@dimen/size_16dp"
+            style="@style/bottomLine"></View>
+        <FrameLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="日期"
+                style="@style/commTextKey">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginLeft="@dimen/size_100dp"
+                android:layout_marginRight="@dimen/size_45dp"
+                android:gravity="right|center_vertical"
+                style="@style/commTextValue">
+
+            </TextView>
+
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></View>
+        <include layout="@layout/layout_bottom_only_mid_btn"></include>
+    </LinearLayout>
+
+</layout>

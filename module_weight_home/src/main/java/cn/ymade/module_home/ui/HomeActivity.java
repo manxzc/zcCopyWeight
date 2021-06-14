@@ -2,6 +2,7 @@ package cn.ymade.module_home.ui;
 
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
@@ -11,6 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zcxie.zc.model_comm.base.BaseActivity;
 import com.zcxie.zc.model_comm.callbacks.CallBack;
 import com.zcxie.zc.model_comm.util.AppConfig;
+import com.zcxie.zc.model_comm.util.CommUtil;
 import com.zcxie.zc.model_comm.util.LiveDataBus;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +24,8 @@ import cn.ymade.module_home.R;
 import cn.ymade.module_home.adapter.HomeMenuAdapterKt;
 import cn.ymade.module_home.common.Constant;
 import cn.ymade.module_home.databinding.ActivityHomeBinding;
+import cn.ymade.module_home.db.beans.LotDataBean;
+import cn.ymade.module_home.db.database.DataBaseManager;
 import cn.ymade.module_home.model.HomeMenuBean;
 import cn.ymade.module_home.vm.VMHome;
 
@@ -51,15 +55,15 @@ public class HomeActivity extends BaseActivity<VMHome, ActivityHomeBinding> {
             @Override
             public void callBack(HomeMenuBean obj) {
                 switch (obj.type) {
-//                    case 1:
-//                        startActivity(new Intent(HomeActivity.this, SNSearchActivity.class));
-//                        break;
+                    case 1:
+                        startActivity(new Intent(HomeActivity.this, SearchGoodsActivity.class));
+                        break;
                     case 2:
                         startActivity(new Intent(HomeActivity.this,LotActivity.class));
                         break;
-//                    case 3:
-//                        startActivity(new Intent(HomeActivity.this, CreateOutLotActivity.class));
-//                        break;
+                    case 3:
+                        startActivity(new Intent(HomeActivity.this, LotCreateActivity.class));
+                        break;
                     case 4:
                         startActivity(new Intent(HomeActivity.this,GoodsListActivity .class));
                         break;
@@ -69,9 +73,9 @@ public class HomeActivity extends BaseActivity<VMHome, ActivityHomeBinding> {
 //                    case 6:
 //                        startActivity(new Intent(HomeActivity.this,SyncActvity .class));
 //                        break;
-//                    case 7:
-//                        startActivity(new Intent(HomeActivity.this,SummaryActivity .class));
-//                        break;
+                    case 7:
+                        startActivity(new Intent(HomeActivity.this,SummaryActivity .class));
+                        break;
                     case 8:
                         startActivity(new Intent(HomeActivity.this,PropertiesActivity.class));
                         break;
@@ -89,10 +93,35 @@ public class HomeActivity extends BaseActivity<VMHome, ActivityHomeBinding> {
         }
     }
 
+    int goodsCount=0;
+    float weight=0f;
     //加载数据
     private void loadData() {
 
+      new Thread(new Runnable() {
+          @Override
+          public void run() {
+             long start= CommUtil.getStartTime();
+             long end=CommUtil.getEndTime();
+            List<LotDataBean> lotDataBeans=  DataBaseManager.INSTANCE.getDb().lotDao().loadAllInTime(start,end);
 
+               goodsCount=0;
+               weight=0f;
+            for ( int i=0;i<lotDataBeans.size();i++){
+                LotDataBean lotDataBean=lotDataBeans.get(i);
+                goodsCount+=lotDataBean.getItems();
+                weight+=lotDataBean.getWeight();
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    getMBinding().tvTitle1.setText(lotDataBeans.size()+"");
+                getMBinding().tvTitle2.setText(goodsCount+"");
+                    getMBinding().tvTitle3.setText(weight+"");
+                }
+            });
+          }
+      }).start();
     }
 
 

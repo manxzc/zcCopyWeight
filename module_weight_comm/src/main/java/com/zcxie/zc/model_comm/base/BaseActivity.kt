@@ -5,11 +5,13 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -21,6 +23,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gyf.barlibrary.ImmersionBar
+import com.yanzhenjie.recyclerview.*
 import com.zcxie.zc.model_comm.R
 import com.zcxie.zc.model_comm.callbacks.CallBack
 import com.zcxie.zc.model_comm.util.CommUtil
@@ -96,8 +99,14 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
      open fun onclickTopEdit(){}
 
 
+
+
+
      private var mid_tv: TextView? = null
      var ll_only_parent:View?=null
+     fun showBottomOnly(show: Boolean){
+         ll_only_parent!!.visibility=if (show) View.VISIBLE else View.GONE
+     }
      fun initBtmOnlyMind(text: String?){
          ll_only_parent=findViewById(R.id.ll_only_parent)
          mid_tv=findViewById(R.id.mid_tv)
@@ -186,6 +195,9 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
      }
      private var searchEt: EditText? = null
 
+     fun getTopSearchText():String{
+         if (searchEt!=null)return searchEt!!.text.toString() else return ""
+     }
      open fun onSearchAction(s: String) {}
      open fun hideTitle() {
          findViewById<View>(R.id.parent_layout).setVisibility(View.GONE)
@@ -250,5 +262,43 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
              return !(event.x > left && event.x < right && event.y > top && event.y < bottom)
          }
          return false
+     }
+     fun createDeleteItem():SwipeMenuCreator{
+         // 创建菜单：
+        return SwipeMenuCreator { leftMenu, rightMenu, position ->
+                 //                SwipeMenuItem deleteItem = new SwipeMenuItem(mContext)
+                 //            ; // 各种文字和图标属性设置。
+                 //                leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。
+                 val deleteItem = SwipeMenuItem(this) // 各种文字和图标属性设置。
+                 deleteItem.setBackgroundColor(Color.parseColor("#FF3D39"))
+                     .setText("删除")
+                     .setTextColor(Color.WHITE)
+                     .setHeight(ViewGroup.LayoutParams.MATCH_PARENT).width = 170
+                 rightMenu.addMenuItem(deleteItem) // 在Item右侧添加一个菜单。
+
+                 // 注意：哪边不想要菜单，那么不要添加即可。
+             }
+     }
+     fun itemClickListener(callBack: CallBack<Int>):OnItemMenuClickListener {
+        return OnItemMenuClickListener { menuBridge, position ->
+             // 任何操作必须先关闭菜单，否则可能出现Item菜单打开状态错乱。
+             menuBridge.closeMenu()
+
+             // 左侧还是右侧菜单：
+             val direction = menuBridge.direction
+             // 菜单在Item中的Position：
+             val menuPosition = menuBridge.position
+
+            callBack.callBack(position)
+             Log.i(
+                 "onItemClick",
+                 ":menuPosition  $menuPosition direction $direction position $position"
+             )
+         }
+     }
+    open fun registItemMenuDeleteListener(rv: SwipeRecyclerView, callBack: CallBack<Int>){
+         rv.setSwipeMenuCreator(createDeleteItem())
+         rv.setOnItemMenuClickListener(itemClickListener(callBack));
+
      }
 }

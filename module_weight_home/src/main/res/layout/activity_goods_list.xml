@@ -18,13 +18,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"></View>
-    <androidx.recyclerview.widget.RecyclerView
+    <com.yanzhenjie.recyclerview.SwipeRecyclerView
         android:layout_width="match_parent"
         android:id="@+id/rv_goods_list"
         android:layout_weight="1"
         android:layout_height="0dp">
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </com.yanzhenjie.recyclerview.SwipeRecyclerView>
     <include layout="@layout/layout_bottom_only_mid_btn"></include>
 </LinearLayout>
 </layout>

@@ -85,7 +85,7 @@
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:id="@+id/in_num"
+                        android:id="@+id/tv_title1"
                         android:textColor="@color/common_background"
                         android:textSize="@dimen/size_18dp"
                         android:layout_marginTop="@dimen/dimen4"
@@ -112,7 +112,7 @@
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:id="@+id/today_out"
+                        android:id="@+id/tv_title2"
                         android:textColor="@color/green"
                         android:textSize="@dimen/size_18dp"
                         android:layout_marginTop="@dimen/dimen4"
@@ -144,7 +144,7 @@
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:id="@+id/wait_num"
+                        android:id="@+id/tv_title3"
                         android:textColor="@color/color_535cdc"
                         android:singleLine="true"
                         android:ellipsize="end"
