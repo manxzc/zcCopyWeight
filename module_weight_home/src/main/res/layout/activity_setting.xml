@@ -213,7 +213,44 @@
                 style="@style/bottomLine"></View>
         </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_45dp"
+            android:layout_marginTop="@dimen/size_12dp"
+            android:background="@color/white">
 
+            <View
+                style="@style/bottomLine"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="打印机"
+                style="@style/commTextKey"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/size_40dp"
+                android:onClick="@{()->vm.toPrintPage()}"
+                android:text="@{vm.prnitStatus}"
+                style="@style/commTextValue"
+                tools:text=""></TextView>
+
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:padding="@dimen/size_2dp"
+                android:src="@mipmap/arrow_right_gray"></ImageView>
+
+            <View
+                style="@style/bottomLine"></View>
+        </FrameLayout>
         <FrameLayout
             android:id="@+id/versionframe"
             android:layout_width="match_parent"

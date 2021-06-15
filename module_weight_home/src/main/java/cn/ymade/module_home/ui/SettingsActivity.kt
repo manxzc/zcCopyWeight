@@ -10,6 +10,7 @@ import com.shehuan.nicedialog.ViewConvertListener
 import com.shehuan.nicedialog.ViewHolder
 import com.zcxie.zc.model_comm.base.BaseActivity
 import com.zcxie.zc.model_comm.util.CommUtil
+import cn.ymade.module_home.utils.PrintCenterManager
 
 /**
  * @author zc.xie
@@ -26,6 +27,7 @@ class SettingsActivity :BaseActivity<VMSetting,ActivitySettingBinding>() {
     override fun processLogic() {
         mBinding?.vm=mViewModel
         setTopTitle("设备信息")
+        mViewModel!!.init(this)
         mBinding?.let {
             it.versiontip.visibility=if (CommUtil.getPackageName()==mViewModel?.getUserInfo()?.value?.Version) View.VISIBLE else View.GONE
 
@@ -36,6 +38,14 @@ class SettingsActivity :BaseActivity<VMSetting,ActivitySettingBinding>() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        mViewModel!!.getPrnitStatus().setValue(
+            if (PrintCenterManager.getInstance()
+                    .isPrinterConnected()
+            ) PrintCenterManager.getInstance().getCurrentPrint().shownName else "未连接"
+        )
+    }
     override fun findViewModelClass(): Class<VMSetting> {
         return VMSetting::class.java
     }

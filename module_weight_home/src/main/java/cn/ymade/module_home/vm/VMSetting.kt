@@ -1,5 +1,6 @@
 package cn.ymade.module_home.vm
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import cn.ymade.module_home.db.beans.DevInfoBean
@@ -8,6 +9,8 @@ import cn.ymade.module_home.model.Device
 import cn.ymade.module_home.model.DeviceInfo
 import cn.ymade.module_home.model.Version
 import cn.ymade.module_home.net.DeviceInfoApi
+import cn.ymade.module_home.ui.PrintActivity
+import cn.ymade.module_home.ui.SettingsActivity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.zcxie.zc.model_comm.base.BaseApplication
 import com.zcxie.zc.model_comm.base.BaseViewModel
@@ -133,5 +136,16 @@ class VMSetting :BaseViewModel() {
 
                 })
         }
+    }
+    var act:SettingsActivity?=null
+    fun init(act:SettingsActivity){
+        this.act=act
+    }
+    private val prnitStatus = MutableLiveData<String>()
+    fun getPrnitStatus(): MutableLiveData<String> {
+        return prnitStatus
+    }
+    fun toPrintPage() {
+        act!!.startActivity(Intent(act!!, PrintActivity::class.java) )
     }
 }

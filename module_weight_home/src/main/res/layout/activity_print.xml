@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
+        tools:context=".activity.PrintActivity">
+
+        <include layout="@layout/top_bar_layout"></include>
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/smart_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlEnableLoadMore="false">
+
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.scwang.smart.refresh.header.ClassicsHeader>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="当前连接的打印机"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"></TextView>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_50dp"
+                    android:background="@color/white"
+                    android:paddingLeft="@dimen/size_16dp">
+
+                    <TextView
+                        android:id="@+id/current_print"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_14sp"
+                        tools:text="无"></TextView>
+                </FrameLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="搜索到的打印机"
+                    android:textColor="@color/color_919191"
+                    android:textSize="@dimen/size_12sp"></TextView>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:minHeight="@dimen/size_50dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/print_mation_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <TextView
+                        android:id="@+id/print_empty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:textColor="@color/color_414141"
+                        android:textSize="@dimen/size_14sp"
+                        android:text="无"></TextView>
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+    </LinearLayout>
+</layout>

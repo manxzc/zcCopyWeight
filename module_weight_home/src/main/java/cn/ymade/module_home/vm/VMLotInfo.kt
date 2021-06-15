@@ -1,6 +1,5 @@
 package cn.ymade.module_home.vm
 
-import android.R.attr.x
 import android.text.TextUtils
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +12,7 @@ import cn.ymade.module_home.ui.LotInfoActivity
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
 import com.zcxie.zc.model_comm.util.CommUtil
+import cn.ymade.module_home.utils.PrintCenterManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -207,7 +207,9 @@ class VMLotInfo :BaseViewModel() {
                 activity!!. showGoods(gb)
             }
         }.start()
+    }
+    fun printLot(){
 
-
+        PrintCenterManager.getInstance().printLot(lotdata,list)
     }
 }

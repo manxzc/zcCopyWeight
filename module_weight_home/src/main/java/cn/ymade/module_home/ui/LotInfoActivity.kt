@@ -1,5 +1,6 @@
 package cn.ymade.module_home.ui
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import cn.ymade.module_home.R
@@ -12,6 +13,7 @@ import cn.ymade.module_home.homebase.ScanBaseActivity
 import cn.ymade.module_home.vm.VMLotInfo
 import com.zcxie.zc.model_comm.util.CommUtil
 import com.zcxie.zc.model_comm.util.LiveDataBus
+import cn.ymade.module_home.utils.PrintCenterManager
 import kotlinx.android.synthetic.main.activity_lotinfo.*
 
 /**
@@ -169,5 +171,16 @@ class LotInfoActivity :ScanBaseActivity<VMLotInfo,ActivityLotinfoBinding> (){
     fun resetRvTitle(count:String,weight:String){
         mBinding!!.rvtitleCount.text=count
         mBinding!!.rvtitleWeight.text=weight
+    }
+
+    override fun clickOnlyMind() {
+        super.clickOnlyMind()
+        if (!PrintCenterManager.getInstance().isPrinterConnected()){
+            CommUtil.ToastU.showToast("打印机未连接 请链接打印机~！")
+            startActivity(Intent(this,PrintActivity::class.java))
+        }else{
+            mViewModel!!.printLot()
+
+        }
     }
 }

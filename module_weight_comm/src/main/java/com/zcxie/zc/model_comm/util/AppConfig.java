@@ -40,6 +40,9 @@ public class AppConfig {
     public static SharedPreference<Boolean> swPackage = sPrefs.value("swPackage ",false);
     public static SharedPreference<Boolean> swEnd = sPrefs.value("swEnd",false);
 
+    public static SharedPreference<String> printMac = sPrefs.value("printMac", (String) null);
+    public static SharedPreference<String> printName = sPrefs.value("printName", (String) null);
+    public static SharedPreference<String> printType = sPrefs.value("printType", (String) null);
 
     public static void clearAll() {
 //        mmkvHelper.clearAll();
