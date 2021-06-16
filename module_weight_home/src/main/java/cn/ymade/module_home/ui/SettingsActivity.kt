@@ -51,7 +51,7 @@ class SettingsActivity :BaseActivity<VMSetting,ActivitySettingBinding>() {
     }
     private var niceDialog: NiceDialog? = null
     fun createLoginOutDialog() {
-        niceDialog = NiceDialog.init().setLayoutId(R.layout.dialog_create)
+        niceDialog = NiceDialog.init().setLayoutId(R.layout.dialog_chose_promapt)
         niceDialog?.setConvertListener(object : ViewConvertListener() {
             override fun convertView(holder: ViewHolder, dialog: BaseNiceDialog) {
                 holder.setText(R.id.dialog_tittle_tv, "设备注销")

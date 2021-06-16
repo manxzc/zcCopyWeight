@@ -47,7 +47,9 @@ fun getNum(key:String,starTime : String, stopTime : String, callback: CallBack<S
     var today=Date( CommUtil.getEndTime())
     val nowdayTime = dateFormat.format(today)
     val nowDate = dateFormat.parse(nowdayTime)
-
+    nowDate!!.hours=23
+    nowDate!!.minutes=59
+    nowDate!!.seconds=59
     if ((d2!!.time)/1000 > (nowDate!!.time)/1000) {
         callback.callBack(null)
         CommUtil.ToastU.showToast("查询时间不能超过今天")

@@ -132,7 +132,7 @@ class VMLotInfo :BaseViewModel() {
 
         var endCode=   code.replace("(","").replace(")","")
 
-        if (code.length<54){
+        if (code.length<45){
             CommUtil.ToastU.showToast("条码长度不符合！")
             return
         }
@@ -163,7 +163,7 @@ class VMLotInfo :BaseViewModel() {
                 shelfLife=date
 
                 Log.i(TAG, "parCode: 这是 有效期 "+shelfLife)
-            } else if (sub.startsWith("13")){
+            } else if (dateStr.startsWith("13")){
                 createDate=date
 
                 Log.i(TAG, "parCode: 这是 生产日期 "+createDate)

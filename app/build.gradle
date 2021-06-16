@@ -7,6 +7,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('D:\\YQKJ\\CopyWeight_Git\\CopyWeight\\copyweightkey.jks')
+            storePassword '123456'
+            keyAlias 'key0'
+            keyPassword '123456'
+        }
+        release {
+            storeFile file('D:\\YQKJ\\CopyWeight_Git\\CopyWeight\\copyweightkey.jks')
+            storePassword '123456'
+            keyAlias 'key0'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 

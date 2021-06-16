@@ -17,6 +17,7 @@ import com.zcxie.zc.model_comm.util.LiveDataBus;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,13 +109,17 @@ public class HomeActivity extends BaseActivity<VMHome, ActivityHomeBinding> {
                 LotDataBean lotDataBean=lotDataBeans.get(i);
                 goodsCount+=lotDataBean.getItems();
                 weight+=lotDataBean.getWeight();
+                Log.i("TAG", "run: lotDataBean.getWeight() "+lotDataBean.getWeight()+"  weight "+weight);
             }
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     getMBinding().tvTitle1.setText(lotDataBeans.size()+"");
-                getMBinding().tvTitle2.setText(goodsCount+"");
-                    getMBinding().tvTitle3.setText(weight+"");
+                    getMBinding().tvTitle2.setText(goodsCount+"");
+                    NumberFormat ddf1  = NumberFormat.getNumberInstance();
+                    ddf1.setMaximumFractionDigits(2);
+                    String s  = ddf1.format(weight);
+                    getMBinding().tvTitle3.setText(s+"");
                 }
             });
           }

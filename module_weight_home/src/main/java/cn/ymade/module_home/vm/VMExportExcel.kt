@@ -65,7 +65,9 @@ class VMExportExcel :BaseViewModel() {
         var today= Date(CommUtil.getEndTime())
         val nowdayTime = dateFormat.format(today)
         val nowDate = dateFormat.parse(nowdayTime)
-
+        nowDate!!.hours=23
+        nowDate!!.minutes=59
+        nowDate!!.seconds=59
         if ((d2!!.time)/1000 > (nowDate!!.time)/1000) {
             callback.callBack(null)
             CommUtil.ToastU.showToast("查询时间不能超过今天")
@@ -112,7 +114,7 @@ class VMExportExcel :BaseViewModel() {
             CommUtil.ToastU.showToast("没有单据可以导出~！")
         }else{
             act!!.showProgress("表格制作中..")
-            Observable.create<Int> {
+            Observable.create<String> {
                 // 创建excel xlsx格式
                 val wb: Workbook = SXSSFWorkbook()
 
@@ -128,6 +130,12 @@ class VMExportExcel :BaseViewModel() {
                     var lot=exportList[i]
                     // 创建工作表
                     val sheet = wb.createSheet()
+                    sheet.setColumnWidth(0, 256*70 );
+                    sheet.setColumnWidth(1, 256*20 );
+                    sheet.setColumnWidth(2, 256*20 );
+                    sheet.setColumnWidth(3, 256*20 );
+                    sheet.setColumnWidth(4, 256*20 );
+                    sheet.setColumnWidth(5, 256*20 );
                     for ( title in 0 until 3) {
                         var row = sheet.createRow(title);
                         var cell = row.createCell(0);
@@ -155,7 +163,7 @@ class VMExportExcel :BaseViewModel() {
                     for (gdrow in gds.indices) {
                         var gd=gds[gdrow]
                         // 创建单元格
-                        var row = sheet.createRow(i+4);
+                        var row = sheet.createRow(gdrow+4);
                         for ( subt in 0 until 6){
                             var cell = row.createCell(subt);
                             cell.cellStyle = cellStyle;
@@ -172,45 +180,18 @@ class VMExportExcel :BaseViewModel() {
 
                 }
 
-//                for (lot in exportList.get(0).items) {
-//
-//                // 设置单元格显示高度
-//                row.setHeightInPoints(128f);
-//
-//                for (int j = 0; j < colNum; j++) {
-//                Cell cell = row.createCell(j);
-//                cell.setCellStyle(cellStyle);
-//
-//                if (j == 0) {
-//                    // 姓名
-//                    cell.setCellValue(personList.get(i).getName());
-//                } else if (j == 1) {
-//                    // 年龄
-//                    cell.setCellValue(personList.get(i).getAge());
-//                } else if (j == 2) {
-//                    // 照片
-//                    int picture = wb.addPicture(personList.get(i).getPhoto(), Workbook.PICTURE_TYPE_PNG);
-//                    Drawing drawingPatriarch = sheet.createDrawingPatriarch();
-//                    ClientAnchor anchor = creationHelper.createClientAnchor();
-//                    anchor.setCol1(j);
-//                    anchor.setRow1(i);
-//                    anchor.setCol2(j + 1);
-//                    anchor.setRow2(i + 1);
-//                    drawingPatriarch.createPicture(anchor, picture);
-//                }
-//            }
-//            }
-
 // 生成excel表格
-                var fos =  FileOutputStream(Environment.getExternalStorageDirectory().absolutePath+"/excel.xlsx");
+                var path=Environment.getExternalStorageDirectory().absolutePath+"/copyWeight"+CommUtil.getCurrentTime2File()+".xlsx"
+                var fos =  FileOutputStream(path)
                 wb.write(fos);
                 fos.flush();
 
-                it.onNext(1)
+                it.onNext(path)
             }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                    act!!.hideProgress()
+                    CommUtil.ToastU.showToast("已完成导出路径 "+it)
                 }
         }
 
