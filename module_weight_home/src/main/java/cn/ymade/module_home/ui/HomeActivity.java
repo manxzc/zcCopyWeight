@@ -70,21 +70,18 @@ public class HomeActivity extends BaseActivity<VMHome, ActivityHomeBinding> {
                     case 5:
                         startActivity(new Intent(HomeActivity.this,ClientActivity.class));
                         break;
-//                    case 6:
-//                        startActivity(new Intent(HomeActivity.this,SyncActvity .class));
-//                        break;
+                    case 6:
+                        startActivity(new Intent(HomeActivity.this,ExportActivity .class));
+                        break;
                     case 7:
                         startActivity(new Intent(HomeActivity.this,SummaryActivity .class));
                         break;
                     case 8:
                         startActivity(new Intent(HomeActivity.this,PropertiesActivity.class));
                         break;
-
                 }
-
             }
         });
-
         getMBinding().rvAssetm.setAdapter(homeMenuAdapter);
     }
     private void initMenuData() {

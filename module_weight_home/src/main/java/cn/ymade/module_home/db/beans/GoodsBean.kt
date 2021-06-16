@@ -20,6 +20,6 @@ import java.io.Serializable
     var weight:Float=0f
    var createDate:String=""
    var shelflife:String=""
-    var lotNumber:String=""
+    var lotNumber:String="" //批号
     @ColumnInfo(name = "GoodsNO") var GoodsNO: String  =""  //货号
 }

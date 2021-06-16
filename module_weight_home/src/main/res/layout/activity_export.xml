@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+    <include layout="@layout/layout_search_bar" android:visibility="gone"></include>
+    <include layout="@layout/top_bar_layout" ></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen10"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/frameLayout3"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="开始时间:"
+                style="@style/commTextKey"></TextView>
+
+            <TextView
+                android:id="@+id/tv_start_time"
+                android:layout_marginLeft="120dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/size_40dp"
+                style="@style/commTextValue"
+                tools:text="mubly"></TextView>
+
+
+            <View
+                style="@style/bottomLine"></View>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout4"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="结束时间:"
+                style="@style/commTextKey"></TextView>
+
+            <TextView
+                android:id="@+id/tv_stop_time"
+                android:layout_marginLeft="120dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:layout_marginRight="@dimen/size_40dp"
+                style="@style/commTextValue"
+                tools:text="mubly"></TextView>
+
+
+            <View
+                style="@style/bottomLine"></View>
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btn_summary_select"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_40dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:background="@drawable/shape_up_bg"
+            android:text="查询"
+            android:textColor="@color/white"></Button>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_marginTop="@dimen/dimen10"
+        android:id="@+id/frameLayout1"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/size_45dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:text="单据数量"
+            style="@style/commTextKey"></TextView>
+
+        <TextView
+            android:id="@+id/tv_lot_count"
+            android:layout_marginLeft="120dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="@dimen/size_40dp"
+            style="@style/commTextValue"
+            tools:text="mubly"></TextView>
+
+
+        <View
+            style="@style/bottomLine"></View>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="@dimen/size_45dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:text="总数量"
+            style="@style/commTextKey"></TextView>
+
+        <TextView
+            android:id="@+id/tv_goods_sum"
+            android:layout_marginLeft="120dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="@dimen/size_40dp"
+            style="@style/commTextValue"
+            tools:text="mubly"></TextView>
+
+
+        <View
+            style="@style/bottomLine"></View>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></View>
+    <include layout="@layout/layout_bottom_only_mid_btn"></include>
+</LinearLayout>
+</layout>
