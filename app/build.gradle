@@ -8,14 +8,8 @@ plugins {
 
 android {
     signingConfigs {
-        debug {
-            storeFile file('D:\\YQKJ\\CopyWeight_Git\\CopyWeight\\copyweightkey.jks')
-            storePassword '123456'
-            keyAlias 'key0'
-            keyPassword '123456'
-        }
         release {
-            storeFile file('D:\\YQKJ\\CopyWeight_Git\\CopyWeight\\copyweightkey.jks')
+            storeFile file('copyweightkey.jks')
             storePassword '123456'
             keyAlias 'key0'
             keyPassword '123456'
@@ -23,7 +17,22 @@ android {
     }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def fileName
+            def date = new Date()
+            def formattedDate = date.format('yyyyMMdd')
 
+            if (outputFileName != null && outputFileName.contains('.apk')) {
+                if (variant.buildType.name.equals('release')) {
+                    fileName = "copyWeight-v${variant.versionName}_release_${formattedDate}.apk"
+                } else if (variant.buildType.name.equals('debug')) {
+                    fileName = "copyWeight-v${variant.versionName}_debug_${formattedDate}.apk"
+                }
+                outputFileName = fileName;
+            }
+        }
+    }
     defaultConfig {
         applicationId "cn.ymade.copyweight"
         minSdkVersion 21

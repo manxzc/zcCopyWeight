@@ -33,6 +33,7 @@ class LotInfoActivity :ScanBaseActivity<VMLotInfo,ActivityLotinfoBinding> (){
     override fun processLogic() {
         setTopTitle("详情")
         initBtmOnlyMind("打印票据")
+//        showTopEdit(true)
         mBinding!!.llWeight.visibility=View.GONE
         lotdata=intent.getSerializableExtra("lotdata")as LotDataBean
         if (lotdata==null){
@@ -83,7 +84,6 @@ class LotInfoActivity :ScanBaseActivity<VMLotInfo,ActivityLotinfoBinding> (){
 
 
         if (lotdata!!.status == "完成") {
-
             showBottomOnly(true)
             mBinding!!.llBottomTwoParent.visibility=View.GONE
         }else{
@@ -140,10 +140,12 @@ class LotInfoActivity :ScanBaseActivity<VMLotInfo,ActivityLotinfoBinding> (){
 
     override fun onclickTopEdit() {
         super.onclickTopEdit()
-        showTopEdit(false)
-        mViewModel!!.showDelet(false)
-        mBinding!!.llLotInfo.visibility=View.VISIBLE
-        mBinding!!.llWeight.visibility=View.GONE
+//        test代码
+        loadCoded("(01)99414637511176(11)210218(3102)001951(21)111300")  //(01)99414637511176(11)210218(3102)001951(21)111300"
+//        showTopEdit(false)
+//        mViewModel!!.showDelet(false)
+//        mBinding!!.llLotInfo.visibility=View.VISIBLE
+//        mBinding!!.llWeight.visibility=View.GONE
     }
 
     override fun findViewModelClass(): Class<VMLotInfo> {
@@ -180,7 +182,6 @@ class LotInfoActivity :ScanBaseActivity<VMLotInfo,ActivityLotinfoBinding> (){
             startActivity(Intent(this,PrintActivity::class.java))
         }else{
             mViewModel!!.printLot()
-
         }
     }
 }

@@ -145,11 +145,22 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
 
      val ACTION_SACNRESULT_BARCODE_VALUE = "barcode_string" //扫描值value
 
+     var isResume=false
+
+     override fun onResume() {
+         super.onResume()
+         isResume=true
+     }
+
+     override fun onStop() {
+         super.onStop()
+         isResume=false
+     }
      var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
          override fun onReceive(context: Context, intent: Intent) {
              try {
                  Log.i("TAG", "onReceive:  ")
-                 if (intent != null) {
+                 if (intent != null&&isResume) {
                      if (intent.hasExtra(ACTION_SACNRESULT_VALUE)) {
                          var value = intent.getStringExtra(ACTION_SACNRESULT_VALUE)
                          if (TextUtils.isEmpty(value)) value =

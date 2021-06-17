@@ -1,5 +1,6 @@
 package cn.ymade.module_home.vm
 
+import android.text.TextUtils
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.ui.ClientActivity
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
+import com.zcxie.zc.model_comm.util.CommUtil
 import com.zcxie.zc.model_comm.util.LiveDataBus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -59,13 +61,24 @@ class VMClient :BaseViewModel() {
     }
 
     fun  search(str:String){
+        Log.i(TAG, "search: lastSearch "+lastSearch+" str "+str)
         if (lastSearch!=str){
             lastSearch=str
             loadData()
         }
     }
-    fun  createClient(name:String,phone:String){
+    fun  createClient(name:String,phone:String,oldName:String){
         Thread{
+          if (DataBaseManager.db.clientDao().loadAllByname(name).isNotEmpty()&&TextUtils.isEmpty(oldName)){
+              act!!.runOnUiThread {
+               CommUtil.ToastU.showToast("此客户已存在")
+              }
+              return@Thread
+          }
+
+            if (!TextUtils.isEmpty(oldName)){
+                DataBaseManager.db.clientDao().delete(ClientBean(oldName,phone))
+            }
             DataBaseManager.db.clientDao().insertAll(ClientBean(name,phone))
             loadData()
         }.start()
@@ -74,6 +87,7 @@ class VMClient :BaseViewModel() {
     fun loadData(){
         list.clear()
         Observable.create<List<ClientBean>> {
+            Log.i(TAG, "loadData: lastSearch "+lastSearch)
          it.onNext(DataBaseManager.db.clientDao().loadAllByname(if (lastSearch.isNullOrEmpty())null else lastSearch))
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

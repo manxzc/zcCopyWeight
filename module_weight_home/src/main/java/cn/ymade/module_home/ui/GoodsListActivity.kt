@@ -1,6 +1,7 @@
 package cn.ymade.module_home.ui
 
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
 import cn.ymade.module_home.R
@@ -60,25 +61,27 @@ class GoodsListActivity :BaseActivity<VMGoodsList,ActivityGoodsListBinding>() {
     private var niceDialog: NiceDialog? = null
 
     fun createDialog(no:String,name:String) {
+        var oldNo=no;
         niceDialog = NiceDialog.init().setLayoutId(R.layout.dialog_create)
         niceDialog?.setConvertListener(object : ViewConvertListener() {
             override fun convertView(holder: ViewHolder, dialog: BaseNiceDialog) {
                 holder.getView<TextView>(R.id.tv_p1).text="货号"
                 holder.getView<TextView>(R.id.tv_p2).text="名称"
                 holder.getView<EditText>(R.id.ed_p1).setText(no+"")
+                holder.getView<EditText>(R.id.ed_p1).inputType=EditorInfo.TYPE_CLASS_NUMBER
                 holder.getView<EditText>(R.id.ed_p2).setText(name+"")
                 holder.getView<View>(R.id.dialog_promapt_cancle).setOnClickListener {
                     niceDialog?.dismiss()
                 }
                 holder.getView<View>(R.id.dialog_promapt_ack).setOnClickListener {
 
-                    var name=holder.getView<EditText>(R.id.ed_p1).text.toString()
-                    var phone=holder.getView<EditText>(R.id.ed_p2).text.toString()
-                    if (name.isNullOrEmpty()||phone.isNullOrEmpty()){
+                    var etNo=holder.getView<EditText>(R.id.ed_p1).text.toString()
+                    var etName=holder.getView<EditText>(R.id.ed_p2).text.toString()
+                    if (etNo.isNullOrEmpty()||etName.isNullOrEmpty()){
                         CommUtil.ToastU.showToast("请输入完整信息~！")
                         return@setOnClickListener
                     }
-                    mViewModel!!.createGooodsCategory(name,phone)
+                    mViewModel!!.createGooodsCategory(etNo,etName,oldNo)
                     niceDialog?.dismiss()
                 }
             }

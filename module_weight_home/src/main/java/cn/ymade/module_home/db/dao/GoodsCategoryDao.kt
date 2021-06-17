@@ -13,11 +13,12 @@ import cn.ymade.module_home.db.beans.GoodsCatrgoryBeanN
  */
 @Dao
 interface GoodsCategoryDao {
-    @Query("SELECT * FROM goodscatrgorybeann")
+    @Query("SELECT * FROM goodscatrgorybeann order by goodsNo desc")
     fun getAll(): List<GoodsCatrgoryBeanN>
 
-    @Query("SELECT * FROM goodscatrgorybeann WHERE :no is null or GoodsNO =(:no) ")
+    @Query("SELECT * FROM goodscatrgorybeann WHERE :no is null or GoodsNO like '%'||:no||'%' order by goodsNo desc")
     fun loadAllByNos(no:String?): List<GoodsCatrgoryBeanN>
+
     @Query("SELECT * FROM goodscatrgorybeann WHERE :no is null or GoodsNO =(:no)  limit 1")
     fun loadSingleByNos(no:String): GoodsCatrgoryBeanN
 

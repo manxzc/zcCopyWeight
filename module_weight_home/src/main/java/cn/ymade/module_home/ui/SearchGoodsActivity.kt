@@ -43,6 +43,11 @@ class SearchGoodsActivity :ScanBaseActivity<VMSearchGoods,ActivitySearchGoodsBin
        mViewModel!!.search(scanCode)
     }
 
+    override fun onSearchAction(s: String) {
+        super.onSearchAction(s)
+        mViewModel!!.search(s)
+    }
+
     fun showGoods(data: GoodsBean?){
         if (data==null){
             mBinding!!.llGoodsInfo.visibility=View.GONE

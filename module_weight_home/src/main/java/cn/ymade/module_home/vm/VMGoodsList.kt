@@ -12,6 +12,7 @@ import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.ui.GoodsListActivity
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
+import com.zcxie.zc.model_comm.util.CommUtil
 import com.zcxie.zc.model_comm.util.LiveDataBus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -59,8 +60,19 @@ class VMGoodsList :BaseViewModel() {
         }.start()
     }
 
-    fun createGooodsCategory(no:String,name:String){
+    fun createGooodsCategory(no:String,name:String,oldNo:String){
         Thread{
+            if (DataBaseManager.db.goodsCategoryDao().loadAllByNos(no).isNotEmpty()&&TextUtils.isEmpty(oldNo)){
+                activity!!.runOnUiThread {
+                    CommUtil.ToastU.showToast("此货号已存在")
+                }
+                return@Thread
+            }
+            if (!TextUtils.isEmpty(oldNo)){
+                var delete=GoodsCatrgoryBeanN()
+                delete.goodsNo=oldNo
+                DataBaseManager.db.goodsCategoryDao().delete(delete)
+            }
             var createBean=GoodsCatrgoryBeanN()
             createBean.goodsName=name
             createBean.goodsNo=no

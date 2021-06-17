@@ -2,6 +2,7 @@ package cn.ymade.module_home.ui
 
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivityClientBinding
@@ -22,12 +23,12 @@ class ClientActivity :BaseActivity<VMClient,ActivityClientBinding>() {
 
     override fun processLogic() {
         initBtmOnlyMind("新建客户")
+        initTopSearchBar()
         selectClient= intent.getIntExtra("selectClient",0)==1
         registItemMenuDeleteListener(mBinding!!.rvClient,object :CallBack<Int>{
             override fun callBack(data: Int) {
                 mViewModel!!.delete(data)
             }
-
         })
         mViewModel!!.initData(this,mBinding!!.rvClient,selectClient)
     }
@@ -51,12 +52,14 @@ class ClientActivity :BaseActivity<VMClient,ActivityClientBinding>() {
     }
     private var niceDialog: NiceDialog? = null
     fun createDialog(name:String,phone:String) {
+        var oldName=name;
         niceDialog = NiceDialog.init().setLayoutId(R.layout.dialog_create)
         niceDialog?.setConvertListener(object : ViewConvertListener() {
             override fun convertView(holder: ViewHolder, dialog: BaseNiceDialog) {
 
                 holder.getView<EditText>(R.id.ed_p1).setText(name+"")
-                holder.getView<EditText>(R.id.ed_p1).setText(phone+"")
+                holder.getView<EditText>(R.id.ed_p2).inputType= EditorInfo.TYPE_CLASS_PHONE
+                holder.getView<EditText>(R.id.ed_p2).setText(phone+"")
 
                 holder.getView<View>(R.id.dialog_promapt_cancle).setOnClickListener {
                     niceDialog?.dismiss()
@@ -65,11 +68,11 @@ class ClientActivity :BaseActivity<VMClient,ActivityClientBinding>() {
 
                     var name=holder.getView<EditText>(R.id.ed_p1).text.toString()
                     var phone=holder.getView<EditText>(R.id.ed_p2).text.toString()
-                    if (name.isNullOrEmpty()||phone.isNullOrEmpty()){
+                    if (name.isNullOrEmpty()){
                         CommUtil.ToastU.showToast("请输入完整信息~！")
                         return@setOnClickListener
                     }
-                    mViewModel!!.createClient(name,phone)
+                    mViewModel!!.createClient(name,phone,oldName)
                     niceDialog?.dismiss()
                 }
             }

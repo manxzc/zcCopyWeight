@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.ymade.module_home.adapter.GoodsListAdapter
 import cn.ymade.module_home.db.beans.GoodsBean
+import cn.ymade.module_home.db.beans.GoodsCatrgoryBeanN
 import cn.ymade.module_home.db.beans.LotDataBean
 import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.ui.LotInfoActivity
@@ -132,75 +133,87 @@ class VMLotInfo :BaseViewModel() {
 
         var endCode=   code.replace("(","").replace(")","")
 
-        if (code.length<45){
-            CommUtil.ToastU.showToast("条码长度不符合！")
-            return
-        }
-        Log.i(TAG, "parCode: endCode "+endCode)
-        var huopin=endCode.substring(11,16)
-        var sub=endCode.substring(16,endCode.length)
-        Log.i(TAG, "parCode: huopin "+huopin+" sub= "+sub)
-
-        var dateStr:String=""
-        var weightStr:String=""
-        if (sub.startsWith("31")){
-            Log.i(TAG, "parCode: 这是 重量 "+sub)
-            weightStr=sub.substring(0,10);
-            dateStr=sub.substring(10,18)
-        }else if (sub.startsWith("17")||sub.startsWith("13")) {
-             dateStr=sub.substring(0,8)
-
-            weightStr=sub.substring(8,18)
-
-        }
-        var mon=dateStr.substring(4,6)
-        Log.i(TAG, "parCode: mon "+mon+" date "+dateStr)
-        var date=dateStr.substring(2,8)
         var createDate=""
         var shelfLife=""
-        if (mon.toInt()<=12){
-            if (dateStr.startsWith("17")){
-                shelfLife=date
+        var packageDate=""
+        var lotNumber=""
+        var huopin="-"
+        var weightStr=""
+        var weitht=0f
+        try {
+            Log.i(TAG, "parCode: endCode $endCode")
+            huopin=endCode.substring(10,15)
+            var sub=endCode.substring(16,endCode.length)
+            Log.i(TAG, "parCode: huopin $huopin sub= $sub")
+            var dateStr:String=""
 
-                Log.i(TAG, "parCode: 这是 有效期 "+shelfLife)
-            } else if (dateStr.startsWith("13")){
-                createDate=date
-
-                Log.i(TAG, "parCode: 这是 生产日期 "+createDate)
-
+            if (sub.startsWith("31")){
+                Log.i(TAG, "parCode: 这是 重量 $sub")
+                weightStr=sub.substring(0,10);
+                dateStr=sub.substring(10,18)
+            }else if (sub.startsWith("17")||sub.startsWith("13")||sub.startsWith("11")) {
+                dateStr=sub.substring(0,8)
+                weightStr=sub.substring(8,18)
             }
-        }
-        Log.i(TAG, "parCode: weightStr $weightStr" +" date "+dateStr)
+            var mon=dateStr.substring(4,6)
+            Log.i(TAG, "parCode: mon $mon date $dateStr")
+            var date=dateStr.substring(2,8)
 
-        var lotNumber=sub.substring(20,sub.length)
-        Log.i(TAG, "parCode: lotNumber "+lotNumber)
+            if (mon.toInt()<=12){
+                if (dateStr.startsWith("17")){
+                    shelfLife=date
+                    Log.i(TAG, "parCode: 这是 有效期 $shelfLife")
+                } else if (dateStr.startsWith("13")){
+                    packageDate=date
+                    Log.i(TAG, "parCode: 这是 包装日期 $createDate")
+                }else if (dateStr.startsWith("11")){
+                    createDate=date
+                    Log.i(TAG, "parCode: 这是 生产日期 $createDate")
+                }
+            }
+            Log.i(TAG, "parCode: weightStr $weightStr date $dateStr")
+
+            lotNumber=sub.substring(20,sub.length)
+            Log.i(TAG, "parCode: lotNumber $lotNumber")
+
+            var t:Float=if (weightStr.startsWith("3102")) 100.00f
+            else if (weightStr.startsWith("3100")) 1f
+            else if (weightStr.startsWith("3101"))10.0f else 100.00f
+            weitht=weightStr.substring(4,weightStr.length).toInt()/t
+        }catch (e:Exception){
+
+        }
+
         /**
          * 解析完毕将数据放入ui 这里不需要存
          */
         Thread{
-         var list=   DataBaseManager.db.goodsDao().loadAllByName(code)
+            var list=   DataBaseManager.db.goodsDao().loadAllByName(code)
             if (list.size>0){
                 activity!!.runOnUiThread {
-                   CommUtil.ToastU.showToast("此条码已存在此单据或其他单据中~！")
+                    CommUtil.ToastU.showToast("此条码已存在此单据或其他单据中~！")
                 }
                 return@Thread
             }
 
 
             var goodsBean=  DataBaseManager.db.goodsCategoryDao().loadSingleByNos(huopin)
+            if (goodsBean==null){
+                goodsBean= GoodsCatrgoryBeanN()
+                goodsBean.goodsNo=huopin
+                DataBaseManager.db.goodsCategoryDao().insertAll(goodsBean)
+            }
 
             var gb= GoodsBean()
             gb.GoodsName=code
             gb.lotNumber=lotNumber
             gb.lotId=lotdata!!.lotId!!
+            gb.packageDate=packageDate
             gb.createDate=createDate
             gb.shelflife=shelfLife
-            gb.GoodsNO=if (goodsBean==null) "$huopin -" else goodsBean.goodsNo+" "+goodsBean.goodsName
+            gb.GoodsNO=if (goodsBean==null) "$huopin -" else goodsBean.goodsNo+"-"+goodsBean.goodsName
 
-            var t:Float=if (weightStr.startsWith("3102")) 100.00f
-            else if (weightStr.startsWith("3100")) 1f
-            else if (weightStr.startsWith("3101"))10.0f else 100.00f
-            gb.weight=weightStr.substring(4,weightStr.length).toInt()/t
+            gb.weight=weitht
             Log.i(TAG, "parCode:  gb.weight "+ gb.weight)
 
             activity!!.runOnUiThread {

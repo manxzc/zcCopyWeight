@@ -41,7 +41,6 @@ class VMSearchGoods :BaseViewModel() {
         act!!.showProgress("加载货品中")
         Observable.create<List<GoodsBean>?> {
             val datas= DataBaseManager.db.goodsDao().loadAllByCode(search)
-
             it.onNext(datas)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
