@@ -9,7 +9,7 @@ interface ClientDao {
     @Query("SELECT * FROM clientbean order by clientName desc")
     fun getAll(): List<ClientBean>
 
-    @Query("SELECT * FROM clientbean WHERE :clientName isnull or  clientName like '%'||:clientName||'%' order by clientName desc")
+    @Query("SELECT * FROM clientbean WHERE :clientName isnull or  clientName like '%'||:clientName||'%' order by lastTime desc")
     fun loadAllByname(clientName:String?): List<ClientBean>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

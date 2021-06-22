@@ -76,6 +76,7 @@ class VMGoodsList :BaseViewModel() {
             var createBean=GoodsCatrgoryBeanN()
             createBean.goodsName=name
             createBean.goodsNo=no
+            createBean.lastTime=System.currentTimeMillis()
             DataBaseManager.db.goodsCategoryDao().insertAll(createBean)
             loadData()
         }.start()

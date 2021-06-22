@@ -44,7 +44,7 @@ class VMHome :BaseViewModel() {
     private var userInfo: MutableLiveData<DevInfoBean?> =
             MutableLiveData<DevInfoBean?>()
 
-    private fun initDeviceInfo(){
+     fun initDeviceInfo(){
         getSerDeviceINfo()
     }
 
@@ -82,6 +82,7 @@ class VMHome :BaseViewModel() {
                                     if (it.code == 1) {
                                         if (it.Device.size > 0) {
                                             val dev: Device = it.Device[0]
+                                            AppConfig.staff.put(dev.Device)
                                             val ver: Version = it.Version[0]
                                             var dbBean = DevInfoBean(
                                                     dev.UUID,

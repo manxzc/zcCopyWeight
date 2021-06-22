@@ -17,7 +17,7 @@ data class DevInfoBean(
     @ColumnInfo(name = "UUID") val UUID: String?,
     @ColumnInfo(name = "Company") val Company: String?,
     @ColumnInfo(name = "CompanySN") val CompanySN: String?,
-    @ColumnInfo(name = "Device") val Device: String?,
+    @ColumnInfo(name = "Device") var Device: String?,
     @ColumnInfo(name = "DeviceSN") val DeviceSN: String?,
     @ColumnInfo(name = "ExpiryDate") val ExpiryDate: String?,
     @ColumnInfo(name = "RegDate") val RegDate: String?,

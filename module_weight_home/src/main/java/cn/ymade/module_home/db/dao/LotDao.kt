@@ -22,7 +22,7 @@ interface LotDao {
 
 //    fun getCount(startTime:Long ,stopTime:Long): List<LotDataBean>
 
-    @Query("SELECT * FROM lotdatabean WHERE :no is null or lotName =(:no) ")
+    @Query("SELECT * FROM lotdatabean WHERE :no is null or lotName like '%'||  :no || '%'")
     fun loadAllByNos(no:String?): List<LotDataBean>
 
     @Query("SELECT * FROM lotdatabean WHERE (createTime BETWEEN :start and :end) ")

@@ -74,6 +74,9 @@ class LotInfoActivity :ScanBaseActivity<VMLotInfo,ActivityLotinfoBinding> (){
             mBinding!!.tvGoodsName.setText("")
         }
     }
+    fun setLotNumber(text:String?){
+        mBinding!!.tvLotNumber.text=text+""
+    }
 
     fun loadLotUI() {
 
@@ -164,6 +167,7 @@ class LotInfoActivity :ScanBaseActivity<VMLotInfo,ActivityLotinfoBinding> (){
 
     fun showGoods(gb:GoodsBean){   //直接添加 修改
         selectBean=gb;
+
         mBinding!!.etWeight.setText(gb.weight.toString())
         mBinding!!.goodsNo.text=gb.GoodsNO
         mBinding!!.tvGoodsName.text=gb.GoodsName

@@ -77,9 +77,9 @@ class VMClient :BaseViewModel() {
           }
 
             if (!TextUtils.isEmpty(oldName)){
-                DataBaseManager.db.clientDao().delete(ClientBean(oldName,phone))
+                DataBaseManager.db.clientDao().delete(ClientBean(oldName,System.currentTimeMillis(),phone))
             }
-            DataBaseManager.db.clientDao().insertAll(ClientBean(name,phone))
+            DataBaseManager.db.clientDao().insertAll(ClientBean(name,System.currentTimeMillis() ,phone))
             loadData()
         }.start()
     }

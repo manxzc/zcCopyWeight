@@ -103,6 +103,7 @@ class VMLotInfo :BaseViewModel() {
                     list.addAll(t!!)
                     adapter.notifyDataSetChanged()
                     activity!!.resetRvTitle("件数 ("+lotdata!!.items+")","重量 ("+lotdata!!.weight+")")
+                    activity!!.setLotNumber(lotdata!!.lotNo)
                     activity!!.hideProgress()
                 }
 

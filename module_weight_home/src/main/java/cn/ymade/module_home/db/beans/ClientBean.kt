@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class ClientBean(
         @PrimaryKey
         var clientName: String , //客户名称
+        var lastTime: Long , //shijian
         var clientPhone: String// 电话
 )

@@ -130,7 +130,7 @@ public class HomeActivity extends BaseActivity<VMHome, ActivityHomeBinding> {
     @Override
     protected void onResume() {
         super.onResume();
-        getMBinding().unCode.setText(AppConfig.staff.get());
+//        getMBinding().unCode.setText(AppConfig.staff.get());
     }
 
     @Override
@@ -154,6 +154,10 @@ public class HomeActivity extends BaseActivity<VMHome, ActivityHomeBinding> {
         LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE,Integer.class).observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
+                if (integer == 3) {
+                    getMViewModel().initDeviceInfo();
+                    return;
+                }
                 loadData();
             }
         });

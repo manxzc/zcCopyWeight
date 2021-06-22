@@ -17,4 +17,5 @@ class GoodsCatrgoryBeanN : Serializable{
     @PrimaryKey
     var goodsNo: String= ""
     var goodsName: String? = ""
+    var lastTime: Long = System.currentTimeMillis()
 }

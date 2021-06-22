@@ -16,7 +16,7 @@ interface GoodsCategoryDao {
     @Query("SELECT * FROM goodscatrgorybeann order by goodsNo desc")
     fun getAll(): List<GoodsCatrgoryBeanN>
 
-    @Query("SELECT * FROM goodscatrgorybeann WHERE :no is null or GoodsNO like '%'||:no||'%' order by goodsNo desc")
+    @Query("SELECT * FROM goodscatrgorybeann WHERE :no is null or GoodsNO like '%'||:no||'%' order by lastTime desc")
     fun loadAllByNos(no:String?): List<GoodsCatrgoryBeanN>
 
     @Query("SELECT * FROM goodscatrgorybeann WHERE :no is null or GoodsNO =(:no)  limit 1")

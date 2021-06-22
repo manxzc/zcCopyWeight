@@ -1,8 +1,12 @@
 package cn.ymade.module_home.ui
 
+import android.content.Intent
+import android.util.Log
 import android.view.View
+import android.widget.EditText
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivitySettingBinding
+import cn.ymade.module_home.db.beans.DevInfoBean
 import cn.ymade.module_home.vm.VMSetting
 import com.shehuan.nicedialog.BaseNiceDialog
 import com.shehuan.nicedialog.NiceDialog
@@ -25,26 +29,43 @@ class SettingsActivity :BaseActivity<VMSetting,ActivitySettingBinding>() {
     }
 
     override fun processLogic() {
-        mBinding?.vm=mViewModel
         setTopTitle("设备信息")
-        mViewModel!!.init(this)
-        mBinding?.let {
-            it.versiontip.visibility=if (CommUtil.getPackageName()==mViewModel?.getUserInfo()?.value?.Version) View.VISIBLE else View.GONE
 
-            it.btnLogout.setOnClickListener {
-                createLoginOutDialog()
-            }
+        mViewModel!!.init(this)
+
+        mBinding!!.toPrint.setOnClickListener {
+            startActivity(Intent(this, PrintActivity::class.java) )
         }
+    }
+
+    fun loadDevInfo(dev: DevInfoBean){
+        Log.i(TAG, "loadDevInfo: "+dev)
+//        dev?.let {
+            mBinding!!.tvCompany.text=dev.Company
+            mBinding!!.tvCompanySN.text=dev.CompanySN
+            mBinding!!.tvDevice.text=dev.Device
+            mBinding!!.tvDeviceSN.text=dev.DeviceSN
+            mBinding!!.tvExpiryDate.text=dev.ExpiryDate
+            mBinding!!.tvRegDate.text=dev.RegDate
+            mBinding!!.tvSN.text=dev.SN
+                mBinding!!.versiontip.visibility=if (CommUtil.getPackageName()!=dev?.Version) View.VISIBLE else View.GONE
+
+                mBinding!!.btnLogout.setOnClickListener {
+                    createLoginOutDialog()
+                }
+                mBinding!!.deviceName.setOnClickListener{
+                    createChangeName(mViewModel!!.getUserInfo()!!.Device!!)
+                }
+
 
     }
 
     override fun onResume() {
         super.onResume()
-        mViewModel!!.getPrnitStatus().setValue(
-            if (PrintCenterManager.getInstance()
-                    .isPrinterConnected()
-            ) PrintCenterManager.getInstance().getCurrentPrint().shownName else "未连接"
-        )
+        mBinding!!.tvStatus.text= if (PrintCenterManager.getInstance()
+                .isPrinterConnected()
+        ) PrintCenterManager.getInstance().getCurrentPrint().shownName else "未连接"
+
     }
     override fun findViewModelClass(): Class<VMSetting> {
         return VMSetting::class.java
@@ -61,6 +82,24 @@ class SettingsActivity :BaseActivity<VMSetting,ActivitySettingBinding>() {
                 holder.getView<View>(R.id.dialog_promapt_ack).setOnClickListener {
                     niceDialog?.dismiss()
                     mViewModel?.loginOut()
+                }
+            }
+        })?.setMargin(60)
+            ?.show(supportFragmentManager)
+    }
+    private var changName: NiceDialog? = null
+    fun createChangeName(name:String) {
+        changName = NiceDialog.init().setLayoutId(R.layout.dialog_changename)
+        changName?.setConvertListener(object : ViewConvertListener() {
+            override fun convertView(holder: ViewHolder, dialog: BaseNiceDialog) {
+                holder.getView<EditText>(R.id.ed_p1).setText(name+"")
+                holder.getView<View>(R.id.dialog_promapt_cancle)
+                    .setOnClickListener { changName?.dismiss() }
+                holder.getView<View>(R.id.dialog_promapt_ack).setOnClickListener {
+                    changName?.dismiss()
+                    var nameChanged=holder.getView<EditText>(R.id.ed_p1).text.toString()
+                    mBinding!!.tvDevice.text=nameChanged
+                    mViewModel!!.changeName(nameChanged)
                 }
             }
         })?.setMargin(60)

@@ -117,7 +117,7 @@
                 android:layout_marginRight="@dimen/size_45dp"
                 android:background="@null"
                 android:gravity="center_vertical|right"
-                android:hint="请输入经办人"
+                android:enabled="false"
                 android:maxLines="1"
                 android:maxLength="35"
                 android:singleLine="true"

@@ -1,9 +1,12 @@
 package cn.ymade.module_home.ui
 
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.Observer
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivityLotCreateBinding
+import cn.ymade.module_home.db.database.DataBaseManager
+import cn.ymade.module_home.model.DeviceInfo
 import cn.ymade.module_home.vm.VMLotCreat
 import com.zcxie.zc.model_comm.base.BaseActivity
 import com.zcxie.zc.model_comm.util.CommUtil
@@ -31,6 +34,16 @@ class LotCreateActivity :BaseActivity<VMLotCreat,ActivityLotCreateBinding>() {
             startActivity(Intent(this,ClientActivity::class.java).putExtra("selectClient",1))
         }
         initEvent()
+        Thread{
+            var list=DataBaseManager.db.devinfoDao().getAll()
+            Log.i(TAG, "processLogic: list "+list.size)
+            if (!list.isNullOrEmpty()){
+               var devinfo=list[0]
+               runOnUiThread {
+                   mBinding!!.etUser.setText(devinfo.Device)
+               }
+            }
+        }.start()
     }
 
     private fun initEvent() {

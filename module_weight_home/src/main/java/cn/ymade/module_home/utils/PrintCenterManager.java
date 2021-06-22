@@ -313,7 +313,7 @@ public class PrintCenterManager {
 
                 }
 
-                api.endJob();
+//                api.endJob();
                 Bundle param = new Bundle();
                 param.putInt(LPAPI.PrintParamName.BOTTOM_MARGIN_PX,10);
                 api.commitJobWithParam(param);

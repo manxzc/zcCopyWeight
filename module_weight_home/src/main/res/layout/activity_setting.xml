@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
 
-        <variable
-            name="vm"
-            type="cn.ymade.module_home.vm.VMSetting" />
         <import type="com.zcxie.zc.model_comm.util.CommUtil"></import>
     </data>
     <LinearLayout
@@ -35,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
-                android:text="@{vm.userInfo.company}"
+                android:id="@+id/tv_company"
                 style="@style/commTextValue"
                 tools:text="mubly"></TextView>
 
@@ -62,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
-                android:text="@{vm.userInfo.companySN}"
+                android:id="@+id/tv_companySN"
                 style="@style/commTextValue"
                 tools:text="mubly"></TextView>
 
@@ -74,7 +71,6 @@
             android:id="@+id/device_name"
             android:layout_width="match_parent"
             android:background="@color/white"
-            android:visibility="gone"
             android:layout_height="@dimen/size_45dp">
 
             <TextView
@@ -82,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/size_16dp"
-                android:text="设备名称"
+                android:text="名称"
                 style="@style/commTextKey"></TextView>
 
             <TextView
@@ -91,10 +87,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
-
+                android:id="@+id/tv_device"
                 style="@style/commTextValue"
                 tools:text="mubly"></TextView>
-<!--            android:text="@{persenter.userInfo.device}"-->
+
 
             <View
                 style="@style/bottomLine"></View>
@@ -120,13 +116,14 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
                 style="@style/commTextValue"
-                android:text="@{vm.userInfo.deviceSN}"
+                android:id="@+id/tv_deviceSN"
                 tools:text="mubly"></TextView>
 
 
             <View
                 style="@style/bottomLine"></View>
         </FrameLayout>
+
         <FrameLayout
             android:id="@+id/hard"
             android:layout_width="match_parent"
@@ -148,7 +145,7 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
                 style="@style/commTextValue"
-                android:text="@{vm.userInfo.SN}"
+                android:id="@+id/tv_SN"
                 tools:text="mubly"></TextView>
 
 
@@ -171,13 +168,13 @@
                 style="@style/commTextKey"></TextView>
 
             <TextView
-                android:layout_marginLeft="120dp"
+                style="@style/commTextValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
+                android:layout_marginLeft="120dp"
                 android:layout_marginRight="@dimen/size_40dp"
-                style="@style/commTextValue"
-                android:text="@{vm.userInfo.regDate}"
+                android:id="@+id/tv_regDate"
                 tools:text="mubly"></TextView>
 
 
@@ -205,7 +202,7 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
                 style="@style/commTextValue"
-                android:text="@{vm.userInfo.expiryDate}"
+                android:id="@+id/tv_expiryDate"
                 tools:text="mubly"></TextView>
 
 
@@ -217,6 +214,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_45dp"
             android:layout_marginTop="@dimen/size_12dp"
+            android:id="@+id/to_print"
             android:background="@color/white">
 
             <View
@@ -235,8 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
-                android:onClick="@{()->vm.toPrintPage()}"
-                android:text="@{vm.prnitStatus}"
+                android:id="@+id/tv_status"
                 style="@style/commTextValue"
                 tools:text=""></TextView>
 
@@ -281,6 +278,7 @@
             android:layout_height="@dimen/size_10dp"
             android:layout_gravity="right"
             android:layout_marginRight="@dimen/size_16dp"
+                android:visibility="gone"
             android:padding="@dimen/size_2dp"
             android:src="@drawable/shape_circle_red"></ImageView>
 

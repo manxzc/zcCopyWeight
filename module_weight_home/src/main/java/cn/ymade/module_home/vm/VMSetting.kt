@@ -3,6 +3,7 @@ package cn.ymade.module_home.vm
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import cn.ymade.module_home.common.Constant
 import cn.ymade.module_home.db.beans.DevInfoBean
 import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.model.Device
@@ -17,6 +18,7 @@ import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.net.RetrofitManager
 import com.zcxie.zc.model_comm.util.AppConfig
 import com.zcxie.zc.model_comm.util.CommUtil
+import com.zcxie.zc.model_comm.util.LiveDataBus
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
@@ -34,30 +36,29 @@ import retrofit2.Response
  */
 class VMSetting :BaseViewModel() {
 
-    init {
-        initDeviceInfo()
-    }
-
-    fun getUserInfo(): MutableLiveData<DevInfoBean?>? {
+    fun getUserInfo(): DevInfoBean? {
         return userInfo
     }
-//
-    fun setUserInfo(userInfo: MutableLiveData<DevInfoBean?>) {
-        this.userInfo = userInfo
+
+
+    private var userInfo:DevInfoBean? =null
+
+    fun changeName(name:String){
+        if (name==userInfo!!.Device)
+            return
+
+        Thread{
+            userInfo!!.Device=name
+            DataBaseManager.db.devinfoDao().insertAll(userInfo!!)
+            LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE).postValue(3)
+             getSerDeviceINfo()
+        }.start()
     }
-
-    private var userInfo: MutableLiveData<DevInfoBean?> =
-        MutableLiveData<DevInfoBean?>()
-
-    private fun initDeviceInfo(){
-        getSerDeviceINfo()
-    }
-
     fun loginOut(){
         AppConfig.clearAll()
         DataBaseManager.closeAll()
         BaseApplication.getInstance()?.closeAllAct()
-        ARouter.getInstance().build("/login/loginActivity").withString("dvIds",userInfo.value?.SN).navigation()
+        ARouter.getInstance().build("/login/loginActivity").withString("dvIds",userInfo?.SN).navigation()
     }
 
     fun getSerDeviceINfo(){
@@ -67,10 +68,12 @@ class VMSetting :BaseViewModel() {
             }.subscribeOn(Schedulers.io())
                 .subscribe(object : Observer<DevInfoBean> {
                     override fun onNext(t: DevInfoBean?) {
-                        t?.let {
+//                        t?.let {
                             Log.i(TAG, "onNext: "+t.toString())
-                            userInfo.postValue(t)
-                        }
+                            act!!.loadDevInfo(t!!)
+                            userInfo=t
+
+//                        }
                     }
 
                     override fun onError(e: Throwable?) {
@@ -109,7 +112,8 @@ class VMSetting :BaseViewModel() {
                                             ver.Url,
                                             ver.Version
                                         )
-                                        userInfo.postValue(dbBean)
+                                        act!!.loadDevInfo(dbBean)
+                                        userInfo=dbBean
                                         Thread {
                                             DataBaseManager.db.devinfoDao().insertAll(dbBean)
                                             AppConfig.hasDevInfo.put(true)
@@ -140,6 +144,7 @@ class VMSetting :BaseViewModel() {
     var act:SettingsActivity?=null
     fun init(act:SettingsActivity){
         this.act=act
+        getSerDeviceINfo()
     }
     private val prnitStatus = MutableLiveData<String>()
     fun getPrnitStatus(): MutableLiveData<String> {
