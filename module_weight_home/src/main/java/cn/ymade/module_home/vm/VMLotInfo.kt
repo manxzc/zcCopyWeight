@@ -63,12 +63,13 @@ class VMLotInfo :BaseViewModel() {
 
         rv.layoutManager=LinearLayoutManager(act)
         rv.adapter=adapter
+        activity!!.showProgress("加载中")
         loadData()
 
     }
     fun loadData(){
         list.clear()
-        activity!!.showProgress("加载中")
+
         Observable.create<List<GoodsBean>> {
             val datas=DataBaseManager.db.goodsDao().loadAllByLotId(lotdata!!.lotId)
 
@@ -86,7 +87,7 @@ class VMLotInfo :BaseViewModel() {
             val ddf1: NumberFormat = NumberFormat.getNumberInstance()
 
             ddf1.setMaximumFractionDigits(2)
-            val s: String = ddf1.format(tw)
+            val s: String = ddf1.format(tw).replace(",","")
             Log.i(TAG, "loadData: tw "+tw+" s "+s)
                 lotdata!!.weight=s.toFloat()
                 lotdata!!.items=datas.size
@@ -98,19 +99,27 @@ class VMLotInfo :BaseViewModel() {
             .subscribe(object : Observer<List<GoodsBean>> {
                 override fun onSubscribe(d: Disposable?) {
                 }
+
                 override fun onNext(t: List<GoodsBean>?) {
                     Log.i(TAG, "onNext: initData " + t?.size)
                     list.addAll(t!!)
                     adapter.notifyDataSetChanged()
-                    activity!!.resetRvTitle("件数 ("+lotdata!!.items+")","重量 ("+lotdata!!.weight+")")
+                    activity!!.resetRvTitle(
+                        "件数 (" + lotdata!!.items + ")",
+                        "重量 (" + lotdata!!.weight + ")"
+                    )
                     activity!!.setLotNumber(lotdata!!.lotNo)
                     activity!!.hideProgress()
                 }
 
                 override fun onError(e: Throwable?) {
+                    activity!!.hideProgress()
+                    Log.i(TAG, "onError: e "+e.toString())
+                    CommUtil.ToastU.showToast("失败~")
                 }
 
                 override fun onComplete() {
+                    activity!!.hideProgress()
                 }
             })
 
@@ -120,20 +129,14 @@ class VMLotInfo :BaseViewModel() {
         adapter.notifyDataSetChanged()
     }
     fun addWeight(goodsBean: GoodsBean){
-        activity!!.showProgress("添加中")
         Thread{
             DataBaseManager.db.goodsDao().insertAll(goodsBean)
-
-            activity!!.runOnUiThread {
-                loadData()
-            }
         }.start()
     }
+
     fun parCode(code:String){
         Log.i(TAG, "parCode: code "+code+" 长度 "+code.length)
-
         var endCode=   code.replace("(","").replace(")","")
-
         var createDate=""
         var shelfLife=""
         var packageDate=""

@@ -10,9 +10,9 @@
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "copyWeight-v1.0_release_20210621.apk"
+      "versionCode": 2,
+      "versionName": "1.01",
+      "outputFile": "copyWeight-v1.01_release_20210712.apk"
     }
   ]
 }
