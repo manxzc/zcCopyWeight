@@ -168,12 +168,12 @@ class VMExportExcel :BaseViewModel() {
                             var cell = row.createCell(subt);
                             cell.cellStyle = cellStyle;
                             when (subt) {
-                                0 -> cell.setCellValue(gd.GoodsName)
+                                0 -> cell.setCellValue(gd.GoodsName+"")
                                 1 -> cell.setCellValue(gd.weight.toString())
-                                2 -> cell.setCellValue(gd.createDate)
-                                3 -> cell.setCellValue(gd.shelflife)
-                                4 -> cell.setCellValue(gd.lotNumber)
-                                5 -> cell.setCellValue(gd.GoodsNO)
+                                2 -> cell.setCellValue(gd.createDate+"")
+                                3 -> cell.setCellValue(gd.shelflife+"")
+                                4 -> cell.setCellValue(gd.lotNumber+"")
+                                5 -> cell.setCellValue(gd.GoodsNO+"")
                             }
                         }
                     }

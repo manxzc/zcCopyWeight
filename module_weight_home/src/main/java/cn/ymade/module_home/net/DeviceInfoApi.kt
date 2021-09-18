@@ -1,6 +1,7 @@
 package cn.ymade.module_home.net
 
 import cn.ymade.module_home.model.DeviceInfo
+import cn.ymade.module_home.model.RuleData
 import com.zcxie.zc.model_comm.model.BaseModel
 import com.zcxie.zc.model_comm.net.HttpConstant
 import io.reactivex.rxjava3.core.Observable
@@ -41,5 +42,6 @@ interface DeviceInfoApi {
 
 //    @POST(HttpConstant.URL_SCAN_LOT_UP)
 //    fun  queryUpload(@Header("token")  token:String,@Body upbody: UploadLotbean)  : retrofit2.Call<BaseModel>
-
+@POST(HttpConstant.URL_PDA_Rule)
+fun  getRule(@Header("token")  token:String)  : retrofit2.Call<RuleData>
 }

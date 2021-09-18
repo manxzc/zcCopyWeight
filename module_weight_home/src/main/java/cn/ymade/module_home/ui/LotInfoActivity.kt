@@ -146,8 +146,14 @@ class LotInfoActivity :ScanBaseActivity<VMLotInfo,ActivityLotinfoBinding> (){
     override fun onclickTopEdit() {
         super.onclickTopEdit()
 //        test代码
-       for (index in 10..1100){
-           loadCoded("(01)99414637511176(11)210218(3102)001951(21)1113$index")  //(01)99414637511176(11)210218(3102)001951(21)111300"
+       for (index in 0 until  3){
+           if (index==0)
+           loadCoded("(01)99414637511176(11)210218(3102)002951(21)1113$index")  //(01)99414637511176(11)210218(3102)001951(21)111300"
+           if (index==1){
+               loadCoded("(01)99414637511176(3102)002951(11)210218(21)1113$index")
+           }else{
+               loadCoded("2109067000910988130012470218987")
+           }
        }
 
 //        showTopEdit(false)

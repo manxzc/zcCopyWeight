@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+    <variable
+        name="bean"
+        type="cn.ymade.module_home.model.RuleData.RuleBean" />
+</data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/size_1dp"
+        android:layout_height="@dimen/size_45dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:text="@{bean.strKey}"
+            style="@style/commTextKey"></TextView>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></Space>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:text="@{bean.category}"
+            android:layout_marginRight="@dimen/dimen20"
+            style="@style/commTextKey"></TextView>
+
+        <TextView
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:text="@{String.valueOf(bean.strStart)}"
+            style="@style/commTextValue"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text=","
+            style="@style/commTextValue"></TextView>
+        <TextView
+            android:layout_width="@dimen/size_40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@{String.valueOf(bean.strLength)}"
+            style="@style/commTextValue"></TextView>
+
+        <Switch
+            android:id="@+id/sw_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/size_40dp"></Switch>
+    </LinearLayout>
+</layout>

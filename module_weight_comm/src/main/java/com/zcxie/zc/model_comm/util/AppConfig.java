@@ -21,7 +21,7 @@ public class AppConfig {
 
     private static SPHelper sPrefs = new SPHelper("copyWeightDatas", Context.MODE_PRIVATE);
     public static SharedPreference<Boolean> Login = sPrefs.value("login", false);
-    public static SharedPreference<String> oaid = sPrefs.value("oaid", UUID.randomUUID().toString());
+    public static SharedPreference<String> ruleStr = sPrefs.value("rule", "");
 
     public static SharedPreference<String> Token = sPrefs.value("Token", "UNKNOW");
 
